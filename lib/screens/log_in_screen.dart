@@ -2,7 +2,6 @@ import 'package:authentication/widgets/my_button.dart';
 import 'package:authentication/widgets/my_textfield.dart';
 import 'package:authentication/widgets/squre_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class LogInScreen extends StatelessWidget {
   LogInScreen({super.key});
