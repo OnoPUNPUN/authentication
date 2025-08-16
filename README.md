@@ -16,7 +16,7 @@ A comprehensive authentication system built with Flutter that supports multiple 
 ## 📸 Screenshots
 
 <div align="center">
-  <img src="sscreenshots\S1.jpg" alt="Login Screen" width="300"/>
+  <img src="sscreenshots/S1.jpg" alt="Login Screen" width="300"/>
 </div>
 
 *Beautiful and intuitive login interface with multiple authentication options*
