@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "579546195851",
+    "project_id": "fire-base-practice-91484",
+    "storage_bucket": "fire-base-practice-91484.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579546195851:android:7a5056a4b6704eec4e318e",
+        "android_client_info": {
+          "package_name": "com.onopunpun.authentication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAQ-tsukYwLwfmyG6GmmcGmTugDAXVmYw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579546195851:android:640d4b897da0a22d4e318e",
+        "android_client_info": {
+          "package_name": "com.onopunpun.fire_base_practice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAQ-tsukYwLwfmyG6GmmcGmTugDAXVmYw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

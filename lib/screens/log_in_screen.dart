@@ -1,16 +1,54 @@
 import 'package:authentication/widgets/my_button.dart';
 import 'package:authentication/widgets/my_textfield.dart';
 import 'package:authentication/widgets/squre_tile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LogInScreen extends StatelessWidget {
-  LogInScreen({super.key});
+class LogInScreen extends StatefulWidget {
+  const LogInScreen({super.key});
 
-  final TextEditingController _usernameTEcontroller = TextEditingController();
+  @override
+  State<LogInScreen> createState() => _LogInScreenState();
+}
+
+class _LogInScreenState extends State<LogInScreen> {
+  final TextEditingController _emailTEcontroller = TextEditingController();
+
   final TextEditingController _passwordTEcontroller = TextEditingController();
 
   // sing user in method
-  void singUserIn() {}
+  void singUserIn() async {
+    // show loading circle
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(child: CircularProgressIndicator());
+      },
+    );
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailTEcontroller.text.trim(),
+        password: _passwordTEcontroller.text,
+      );
+      Navigator.of(context).pop();
+    } on FirebaseAuthException catch (e) {
+      Navigator.of(context).pop();
+      if (e.code == 'invalid-credential') {
+        wrongEmailorPasswordMessage();
+      }
+    }
+  }
+
+  // wrong email message popup
+  void wrongEmailorPasswordMessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(title: Text('Incorrect Email or Password'));
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +75,8 @@ class LogInScreen extends StatelessWidget {
 
               //username textfield
               MyTextfield(
-                controller: _usernameTEcontroller,
-                hintText: 'Username',
+                controller: _emailTEcontroller,
+                hintText: 'Email',
                 obscureText: false,
               ),
 
