@@ -1,3 +1,4 @@
+import 'package:authentication/services/auth_service.dart';
 import 'package:authentication/widgets/my_button.dart';
 import 'package:authentication/widgets/my_textfield.dart';
 import 'package:authentication/widgets/squre_tile.dart';
@@ -144,12 +145,18 @@ class _LogInScreenState extends State<LogInScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     //google button
-                    SqureTile(imagePath: 'images/logo/google-logo.svg'),
+                    SqureTile(
+                      imagePath: 'images/logo/google-logo.svg',
+                      onTap: () => AuthService().signInWithGoogle(),
+                    ),
 
                     const SizedBox(width: 10),
 
                     //apple button
-                    SqureTile(imagePath: 'images/logo/apple-logo.svg'),
+                    SqureTile(
+                      imagePath: 'images/logo/apple-logo.svg',
+                      onTap: () {},
+                    ),
                   ],
                 ),
 

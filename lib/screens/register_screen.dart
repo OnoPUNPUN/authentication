@@ -1,3 +1,4 @@
+import 'package:authentication/services/auth_service.dart';
 import 'package:authentication/widgets/my_button.dart';
 import 'package:authentication/widgets/my_textfield.dart';
 import 'package:authentication/widgets/squre_tile.dart';
@@ -20,9 +21,7 @@ class _LogInScreenState extends State<RegisterScreen> {
   final TextEditingController _confirmPasswordTEcontroller =
       TextEditingController();
 
-  // sing user in method
   void singUserUp() async {
-    // show loading circle
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -33,7 +32,7 @@ class _LogInScreenState extends State<RegisterScreen> {
 
     try {
       if (_passwordTEcontroller.text != _confirmPasswordTEcontroller.text) {
-        if (mounted) Navigator.of(context).pop(); // close loader
+        if (mounted) Navigator.of(context).pop();
         if (mounted) showErroMessage("Passwords don't match!");
         return;
       }
@@ -43,11 +42,11 @@ class _LogInScreenState extends State<RegisterScreen> {
         password: _passwordTEcontroller.text,
       );
 
-      if (!mounted) return; // check again after async work
-      Navigator.of(context).pop(); // close loader on success
+      if (!mounted) return;
+      Navigator.of(context).pop();
     } on FirebaseAuthException catch (e) {
       if (!mounted) return;
-      Navigator.of(context).pop(); // close loader on error
+      Navigator.of(context).pop();
 
       if (e.code == 'invalid-credential') {
         if (mounted) showErroMessage('Incorrect Email or Password');
@@ -165,12 +164,18 @@ class _LogInScreenState extends State<RegisterScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     //google button
-                    SqureTile(imagePath: 'images/logo/google-logo.svg'),
+                    SqureTile(
+                      imagePath: 'images/logo/google-logo.svg',
+                      onTap: () => AuthService().signInWithGoogle(),
+                    ),
 
                     const SizedBox(width: 10),
 
                     //apple button
-                    SqureTile(imagePath: 'images/logo/apple-logo.svg'),
+                    SqureTile(
+                      imagePath: 'images/logo/apple-logo.svg',
+                      onTap: () {},
+                    ),
                   ],
                 ),
 
