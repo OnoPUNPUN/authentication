@@ -17,37 +17,52 @@ class _LogInScreenState extends State<RegisterScreen> {
   final TextEditingController _emailTEcontroller = TextEditingController();
 
   final TextEditingController _passwordTEcontroller = TextEditingController();
+  final TextEditingController _confirmPasswordTEcontroller =
+      TextEditingController();
 
   // sing user in method
   void singUserUp() async {
     // show loading circle
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (context) {
         return const Center(child: CircularProgressIndicator());
       },
     );
 
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      if (_passwordTEcontroller.text != _confirmPasswordTEcontroller.text) {
+        if (mounted) Navigator.of(context).pop(); // close loader
+        if (mounted) showErroMessage("Passwords don't match!");
+        return;
+      }
+
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailTEcontroller.text.trim(),
         password: _passwordTEcontroller.text,
       );
-      Navigator.of(context).pop();
+
+      if (!mounted) return; // check again after async work
+      Navigator.of(context).pop(); // close loader on success
     } on FirebaseAuthException catch (e) {
-      Navigator.of(context).pop();
+      if (!mounted) return;
+      Navigator.of(context).pop(); // close loader on error
+
       if (e.code == 'invalid-credential') {
-        wrongEmailorPasswordMessage();
+        if (mounted) showErroMessage('Incorrect Email or Password');
+      } else {
+        if (mounted) showErroMessage(e.message ?? 'Something went wrong');
       }
     }
   }
 
   // wrong email message popup
-  void wrongEmailorPasswordMessage() {
+  void showErroMessage(String message) {
     showDialog(
       context: context,
       builder: (context) {
-        return const AlertDialog(title: Text('Incorrect Email or Password'));
+        return AlertDialog(title: Text(message));
       },
     );
   }
@@ -70,7 +85,7 @@ class _LogInScreenState extends State<RegisterScreen> {
 
                 // welcome back, you've been missed!
                 Text(
-                  "Welcome back your've been missed",
+                  "Let's create an account!!",
                   style: TextStyle(color: Colors.grey[700], fontSize: 16),
                 ),
 
@@ -96,7 +111,7 @@ class _LogInScreenState extends State<RegisterScreen> {
 
                 // confirm password textfield
                 MyTextfield(
-                  controller: _passwordTEcontroller,
+                  controller: _confirmPasswordTEcontroller,
                   hintText: 'Confirm Passowrd',
                   obscureText: true,
                 ),
@@ -117,7 +132,7 @@ class _LogInScreenState extends State<RegisterScreen> {
                 const SizedBox(height: 25),
 
                 // sing in button
-                MyButton(onTap: singUserUp),
+                MyButton(onTap: singUserUp, buttonName: "Sign Up"),
 
                 const SizedBox(height: 25),
 

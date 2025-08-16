@@ -111,7 +111,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 const SizedBox(height: 25),
 
                 // sing in button
-                MyButton(onTap: singUserIn),
+                MyButton(onTap: singUserIn, buttonName: "Sign In"),
 
                 const SizedBox(height: 50),
 
