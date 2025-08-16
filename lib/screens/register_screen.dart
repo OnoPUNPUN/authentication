@@ -4,22 +4,22 @@ import 'package:authentication/widgets/squre_tile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LogInScreen extends StatefulWidget {
+class RegisterScreen extends StatefulWidget {
   final Function()? onTap;
 
-  const LogInScreen({super.key, required this.onTap});
+  const RegisterScreen({super.key, required this.onTap});
 
   @override
-  State<LogInScreen> createState() => _LogInScreenState();
+  State<RegisterScreen> createState() => _LogInScreenState();
 }
 
-class _LogInScreenState extends State<LogInScreen> {
+class _LogInScreenState extends State<RegisterScreen> {
   final TextEditingController _emailTEcontroller = TextEditingController();
 
   final TextEditingController _passwordTEcontroller = TextEditingController();
 
   // sing user in method
-  void singUserIn() async {
+  void singUserUp() async {
     // show loading circle
     showDialog(
       context: context,
@@ -94,26 +94,32 @@ class _LogInScreenState extends State<LogInScreen> {
 
                 const SizedBox(height: 10),
 
-                // forgot password?
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Forgot Password?',
-                        style: TextStyle(color: Colors.grey[600]),
-                      ),
-                    ],
-                  ),
+                // confirm password textfield
+                MyTextfield(
+                  controller: _passwordTEcontroller,
+                  hintText: 'Confirm Passowrd',
+                  obscureText: true,
                 ),
 
+                // forgot password?
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.end,
+                //     children: [
+                //       Text(
+                //         'Forgot Password?',
+                //         style: TextStyle(color: Colors.grey[600]),
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 const SizedBox(height: 25),
 
                 // sing in button
-                MyButton(onTap: singUserIn),
+                MyButton(onTap: singUserUp),
 
-                const SizedBox(height: 50),
+                const SizedBox(height: 25),
 
                 // or continue with
                 Padding(
@@ -137,7 +143,7 @@ class _LogInScreenState extends State<LogInScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 50),
+                const SizedBox(height: 25),
 
                 // google + apple sing in buttons
                 Row(
@@ -153,21 +159,21 @@ class _LogInScreenState extends State<LogInScreen> {
                   ],
                 ),
 
-                const SizedBox(height: 50),
+                const SizedBox(height: 25),
 
                 // not a member? register now
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Not a member?',
+                      'Alread Have an account?',
                       style: TextStyle(color: Colors.grey[700]),
                     ),
                     const SizedBox(width: 4),
                     GestureDetector(
                       onTap: widget.onTap,
                       child: const Text(
-                        'Register now',
+                        'Login now',
                         style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,

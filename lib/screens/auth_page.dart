@@ -1,5 +1,5 @@
 import 'package:authentication/screens/home_screen.dart';
-import 'package:authentication/screens/log_in_screen.dart';
+import 'package:authentication/screens/login_or_register_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class AuthPage extends StatelessWidget {
             return HomeScreen();
           } else {
             // user not logged in
-            return LogInScreen();
+            return LoginOrRegisterScreen();
           }
         },
       ),
